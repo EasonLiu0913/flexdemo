@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>flex demo</title>
+        <link
+            rel="stylesheet"
+            href="./bootstrap-4.6.2-dist/css/bootstrap.min.css"
+        />
+        <style>
+            .main-axis {
+                color: lightcoral;
+            }
+
+            .secondary-axis {
+                color: lightseagreen;
+            }
+
+            #intro-area {
+                padding: 10px;
+                background-color: rgb(210, 210, 210);
+                border: 1px solid #000;
+                margin-bottom: 50px;
+            }
+
+            #wrap {
+                width: 100%;
+                height: 500px;
+                background-color: #ccc;
+            }
+
+            .box {
+                width: 100px;
+                height: 100px;
+            }
+
+            input {
+                margin: 0 2px 0 10px;
+            }
+
+            label:not(.active) {
+                color: #ccc;
+            }
+
+            .justify-content-evenly {
+                justify-content: space-evenly;
+            }
+
+            .basic-attr::after {
+                content: '基本屬性';
+                display: block;
+                position: absolute;
+                padding: 0 8px;
+                top: 0;
+                transform: translateY(-70%);
+                background-color: #fff;
+                border: 1px solid #ccc;
+            }
+
+            .wrap-attr::after {
+                content: '換行控制';
+                display: block;
+                position: absolute;
+                padding: 0 8px;
+                top: 0;
+                transform: translateY(-70%);
+                background-color: #fff;
+                border: 1px solid #ccc;
+            }
+
+            .self-attr::after {
+                content: '子層屬性';
+                display: block;
+                position: absolute;
+                padding: 0 8px;
+                top: 0;
+                transform: translateY(-70%);
+                background-color: #fff;
+                border: 1px solid #ccc;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Flex Layout PlayGround</h1>
+            <p id="intro-area" class="mb-4">
+                Flex 的佈局，必須從主軸方向開始說起。 我們排列 div
+                時，會有個主要的方向，我們稱之為<span class="main-axis"
+                    >主軸</span
+                >。 與主軸垂直的方向，我們稱之為<span class="secondary-axis"
+                    >次軸</span
+                >。
+            </p>
+
+            <form class="my-3" action="">
+                <div class="border p-3 mb-4 position-relative basic-attr">
+                    <div class="input-group mb-1">
+                        <p class="mb-0 mr-2">
+                            [<span class="main-axis">主軸</span>方向]
+                        </p>
+                        <span class="mb-0" for="">flex-direction:</span>
+                        <input
+                            id="flex-row"
+                            type="radio"
+                            name="flex-direction"
+                            value="flex-row"
+                            checked
+                        />
+                        <label
+                            for="flex-row"
+                            class="mb-0 flex-direction-label active"
+                            >row</label
+                        >
+                        <input
+                            id="flex-row-reverse"
+                            type="radio"
+                            name="flex-direction"
+                            value="flex-row-reverse"
+                        /><label
+                            for="flex-row-reverse"
+                            class="mb-0 flex-direction-label"
+                            >row-reverse</label
+                        >
+                        <input
+                            id="flex-column"
+                            type="radio"
+                            name="flex-direction"
+                            value="flex-column"
+                        /><label
+                            for="flex-column"
+                            class="mb-0 flex-direction-label"
+                            >column</label
+                        >
+                        <input
+                            id="flex-column-reverse"
+                            type="radio"
+                            name="flex-direction"
+                            value="flex-column-reverse"
+                        /><label
+                            for="flex-column-reverse"
+                            class="mb-0 flex-direction-label"
+                            >column-reverse</label
+                        >
+                        <p></p>
+                    </div>
+
+                    <div class="input-group mb-1">
+                        <p class="mb-0 mr-2">
+                            [<span class="main-axis">主軸</span>對齊]
+                        </p>
+                        <span class="mb-0">justify-content:</span>
+                        <input
+                            id="justify-content-start"
+                            type="radio"
+                            name="justify-content"
+                            value="justify-content-start"
+                            checked
+                        />
+                        <label
+                            for="justify-content-start"
+                            class="mb-0 justify-content-label active"
+                            >flex-start</label
+                        >
+                        <input
+                            id="justify-content-end"
+                            type="radio"
+                            name="justify-content"
+                            value="justify-content-end"
+                        /><label
+                            for="justify-content-end"
+                            class="mb-0 justify-content-label"
+                            >flex-end</label
+                        >
+                        <input
+                            id="justify-content-center"
+                            type="radio"
+                            name="justify-content"
+                            value="justify-content-center"
+                        /><label
+                            for="justify-content-center"
+                            class="mb-0 justify-content-label"
+                            >center</label
+                        >
+                        <input
+                            id="justify-content-between"
+                            type="radio"
+                            name="justify-content"
+                            value="justify-content-between"
+                        /><label
+                            for="justify-content-between"
+                            class="mb-0 justify-content-label"
+                            >space-between</label
+                        >
+
+                        <input
+                            id="justify-content-around"
+                            type="radio"
+                            name="justify-content"
+                            value="justify-content-around"
+                        /><label
+                            for="justify-content-around"
+                            class="mb-0 justify-content-label"
+                            >space-around</label
+                        >
+                        <input
+                            id="justify-content-evenly"
+                            type="radio"
+                            name="justify-content"
+                            value="justify-content-evenly"
+                        /><label
+                            for="justify-content-evenly"
+                            class="mb-0 justify-content-label"
+                            >space-evenly</label
+                        >
+                    </div>
+
+                    <div class="input-group mb-1">
+                        <p class="mb-0 mr-2">
+                            [<span class="secondary-axis">次軸</span>對齊]
+                        </p>
+                        <span class="mb-0">align-items:</span>
+                        <input
+                            id="align-items-start"
+                            type="radio"
+                            name="align-items"
+                            value="align-items-start"
+                        />
+                        <label
+                            for="align-items-start"
+                            class="mb-0 align-items-label"
+                            >flex-start</label
+                        >
+                        <input
+                            id="align-items-end"
+                            type="radio"
+                            name="align-items"
+                            value="align-items-end"
+                        />
+                        <label
+                            for="align-items-end"
+                            class="mb-0 align-items-label"
+                            >flex-end</label
+                        >
+                        <input
+                            id="align-items-center"
+                            type="radio"
+                            name="align-items"
+                            value="align-items-center"
+                        />
+                        <label
+                            for="align-items-center"
+                            class="mb-0 align-items-label"
+                            >center</label
+                        >
+                        <input
+                            id="align-items-stretch"
+                            type="radio"
+                            name="align-items"
+                            value="align-items-stretch"
+                            checked
+                        />
+                        <label
+                            for="align-items-stretch"
+                            class="mb-0 align-items-label active"
+                            >stretch</label
+                        >
+                        <input
+                            id="align-items-baseline"
+                            type="radio"
+                            name="align-items"
+                            value="align-items-baseline"
+                        />
+                        <label
+                            for="align-items-baseline"
+                            class="mb-0 align-items-label"
+                            >baseline</label
+                        >
+                    </div>
+                </div>
+
+                <div class="border p-3 mb-4 position-relative wrap-attr">
+                    <div class="input-group mb-1">
+                        <p class="mb-0 mr-2">
+                            [<span class="main-axis">主軸</span>換行]
+                        </p>
+                        <span class="mb-0">flex-wrap:</span>
+                        <input
+                            id="flex-nowrap"
+                            type="radio"
+                            name="flex-wrap"
+                            value="flex-nowrap"
+                            checked
+                        />
+                        <label
+                            for="flex-nowrap"
+                            class="mb-0 flex-wrap-label active"
+                            >nowrap</label
+                        >
+                        <input
+                            id="flex-wrap"
+                            type="radio"
+                            name="flex-wrap"
+                            value="flex-wrap"
+                        />
+                        <label for="flex-wrap" class="mb-0 flex-wrap-label"
+                            >wrap</label
+                        >
+                        <input
+                            id="flex-wrap-reverse"
+                            type="radio"
+                            name="flex-wrap"
+                            value="flex-wrap-reverse"
+                        />
+                        <label
+                            for="flex-wrap-reverse"
+                            class="mb-0 flex-wrap-label"
+                            >wrap-reverse</label
+                        >
+                    </div>
+
+                    <div class="input-group mb-1">
+                        <p class="mb-0 mr-2">
+                            [<span class="secondary-axis">多行</span>對齊]
+                        </p>
+                        <span class="mb-0">align-content:</span>
+                        <input
+                            id="align-content-start"
+                            type="radio"
+                            name="align-content"
+                            value="align-content-start"
+                        />
+                        <label
+                            for="align-content-start"
+                            class="mb-0 align-content-label"
+                            >flex-start</label
+                        >
+                        <input
+                            id="align-content-end"
+                            type="radio"
+                            name="align-content"
+                            value="align-content-end"
+                        />
+                        <label
+                            for="align-content-end"
+                            class="mb-0 align-content-label"
+                            >flex-end</label
+                        >
+                        <input
+                            id="align-content-center"
+                            type="radio"
+                            name="align-content"
+                            value="align-content-center"
+                        />
+                        <label
+                            for="align-content-center"
+                            class="mb-0 align-content-label"
+                            >center</label
+                        >
+                        <input
+                            id="align-content-between"
+                            type="radio"
+                            name="align-content"
+                            value="align-content-between"
+                        />
+                        <label
+                            for="align-content-between"
+                            class="mb-0 align-content-label"
+                            >space-between</label
+                        >
+                        <input
+                            id="align-content-around"
+                            type="radio"
+                            name="align-content"
+                            value="align-content-around"
+                        />
+                        <label
+                            for="align-content-around"
+                            class="mb-0 align-content-label"
+                            >space-around</label
+                        >
+                        <input
+                            id="align-content-stretch"
+                            type="radio"
+                            name="align-content"
+                            value="align-content-stretch"
+                            checked
+                        />
+                        <label
+                            for="align-content-stretch"
+                            class="mb-0 align-content-label active"
+                            >stretch</label
+                        >
+                    </div>
+                </div>
+
+                <!-- 主軸長大 -->
+                <!-- <div class="input-group mb-1">
+                    <p class="mb-0 mr-2">[主軸長大]</p>
+                    <span class="mb-0">flex-grow:</span>
+                    <input
+                        id="flex-grow-0"
+                        type="radio"
+                        name="flex-grow"
+                        value="flex-grow-0"
+                        checked
+                    />
+                    <label for="flex-grow-0" class="mb-0 flex-grow-label active"
+                        >0</label
+                    >
+                    <input
+                        id="flex-grow-1"
+                        type="radio"
+                        name="flex-grow"
+                        value="flex-grow-1"
+                    />
+                    <label for="flex-grow-1" class="mb-0 flex-grow-label"
+                        >1</label
+                    >
+                </div> -->
+
+                <!-- 主軸縮小 -->
+                <!-- <div class="input-group mb-1">
+                    <p class="mb-0 mr-2">[主軸縮小]</p>
+                    <span class="mb-0">flex-shrink:</span>
+                    <input
+                        id="flex-shrink-0"
+                        type="radio"
+                        name="flex-shrink"
+                        value="flex-shrink-0"
+                    />
+                    <label for="flex-shrink-0" class="mb-0 flex-shrink-label"
+                        >0</label
+                    >
+                    <input
+                        id="flex-shrink-1"
+                        type="radio"
+                        name="flex-shrink"
+                        value="flex-shrink-1"
+                        checked
+                    />
+                    <label
+                        for="flex-shrink-1"
+                        class="mb-0 flex-shrink-label active"
+                        >1</label
+                    >
+                </div> -->
+
+                <!-- 主軸基準 -->
+                <!-- <div class="input-group mb-1">
+                    <p class="mb-0 mr-2">[主軸基準]</p>
+                    <span class="mb-0">flex-basis:</span>
+                    <input
+                        id="flex-basis"
+                        type="text"
+                        name="flex-basis"
+                        value="auto"
+                    />
+                </div> -->
+
+                <div
+                    class="border px-3 pt-3 pb-2 mb-0 position-relative self-attr"
+                >
+                    <div class="input-group mb-1 align-items-center">
+                        <p class="mb-0 mr-2">[新增 box 自己的規則]</p>
+                        <span class="mb-0"></span>
+                        <select id="alignSelf"></select>
+                        <button
+                            id="btnAddAlignSelf"
+                            class="btn btn-secondary ml-2 py-1"
+                        >
+                            新增
+                        </button>
+                    </div>
+                </div>
+
+                <div id="alignSelfRuleArea" class="mb-1"></div>
+            </form>
+
+            <div id="wrap" class="d-flex">
+                <div class="box">box1</div>
+                <div class="box">box2</div>
+                <div class="box">box3</div>
+            </div>
+            <label for="">box數量：</label>
+            <input type="number" id="boxNum" value="3" />
+            <label for="">box寬度：</label>
+            <input type="text" id="boxWidth" value="100" />
+            <label for="">box高度：</label>
+            <input type="text" id="boxHeight" value="100" />
+        </div>
+
+        <!-- <script src="./js/jquery-3.6.0.min.js"></script> -->
+
+        <script>
+            function getRandom(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            function getHSL() {
+                const hue = getRandom(0, 360);
+                const saturation = getRandom(80, 100);
+                const lightness = getRandom(70, 90);
+                return [
+                    `hsla(${hue}, ${saturation}%, ${lightness}%,.5)`,
+                    `hsla(${hue + 30}, ${saturation - 20}%, ${
+                        lightness - 40
+                    }%,.5)`,
+                ];
+            }
+
+            function getLinearGradientBG() {
+                const hslArray = getHSL();
+                return `linear-gradient( ${hslArray[0]},${hslArray[1]})`;
+            }
+
+            const boxes = document.querySelectorAll('.box');
+            boxes.forEach((element) => {
+                element.style.background = getLinearGradientBG();
+            });
+
+            document.querySelector('form').addEventListener('submit', (e) => {
+                e.preventDefault();
+            });
+
+            // 製作 box 自定次軸規則選單
+            const makeAlignSelfRuleSelectorList = () => {
+                const boxes = document.querySelectorAll('.box');
+                document.querySelector('#alignSelf').innerHTML = '';
+                document.querySelector('#alignSelfRuleArea').innerHTML = '';
+                boxes.forEach((element) => {
+                    const newOption = document.createElement('option');
+                    newOption.value = element.innerText;
+                    newOption.innerText = element.innerText;
+                    document.querySelector('#alignSelf').appendChild(newOption);
+                });
+            };
+
+            makeAlignSelfRuleSelectorList();
+
+            // 使用者修改 box 數量
+            document.querySelector('#boxNum').addEventListener('input', (e) => {
+                const inputNum = e.target.value;
+                if (isNaN(inputNum) || inputNum === '') return;
+                const classValue =
+                    document.querySelector('.box').classList.value;
+                document.querySelector('#wrap').innerHTML = '';
+                for (let index = 0; index < inputNum; index++) {
+                    const newDiv = document.createElement('div');
+                    newDiv.classList.add(classValue);
+                    newDiv.innerText = `box${index + 1}`;
+                    document.querySelector('#wrap').append(newDiv);
+                }
+
+                const boxes = document.querySelectorAll('.box');
+                boxes.forEach((element) => {
+                    element.style.background = getLinearGradientBG();
+                    element.style.width =
+                        document.querySelector('#boxWidth').value + 'px';
+                    element.style.height =
+                        document.querySelector('#boxHeight').value + 'px';
+                });
+
+                makeAlignSelfRuleSelectorList();
+            });
+
+            // 使用者修改 box 寬
+            document
+                .querySelector('#boxWidth')
+                .addEventListener('input', (e) => {
+                    const inputNum = e.target.value;
+                    if (isNaN(inputNum) || inputNum === '') return;
+                    const boxes = document.querySelectorAll('.box');
+                    boxes.forEach((element) => {
+                        element.style.width = `${inputNum}px`;
+                    });
+                });
+
+            // 使用者修改 box 高
+            document
+                .querySelector('#boxHeight')
+                .addEventListener('input', (e) => {
+                    const inputNum = e.target.value;
+                    if (isNaN(inputNum) || inputNum === '') return;
+                    const boxes = document.querySelectorAll('.box');
+                    boxes.forEach((element) => {
+                        element.style.height = `${inputNum}${
+                            isNaN(parseInt(inputNum)) ? '' : 'px'
+                        }`;
+                    });
+                });
+
+            // 使用者修改主軸方向
+            document
+                .querySelectorAll('input[name="flex-direction"]')
+                .forEach((item) => {
+                    item.addEventListener('click', (e) => {
+                        document
+                            .querySelectorAll('.flex-direction-label')
+                            .forEach((item) => {
+                                item.classList.remove('active');
+                            });
+                        e.target.nextElementSibling.classList.add('active');
+                        document
+                            .querySelector('#wrap')
+                            .classList.remove(
+                                'flex-row',
+                                'flex-row-reverse',
+                                'flex-column',
+                                'flex-column-reverse'
+                            );
+                        document
+                            .querySelector('#wrap')
+                            .classList.add(e.target.value);
+                    });
+                });
+
+            // 使用者修改主軸對齊
+            document
+                .querySelectorAll('input[name="justify-content"]')
+                .forEach((item) => {
+                    item.addEventListener('click', (e) => {
+                        document
+                            .querySelectorAll('.justify-content-label')
+                            .forEach((item) => {
+                                item.classList.remove('active');
+                            });
+                        e.target.nextElementSibling.classList.add('active');
+                        document
+                            .querySelector('#wrap')
+                            .classList.remove(
+                                'justify-content-label',
+                                'justify-content-start',
+                                'justify-content-end',
+                                'justify-content-center',
+                                'justify-content-between',
+                                'justify-content-around',
+                                'justify-content-evenly'
+                            );
+                        document
+                            .querySelector('#wrap')
+                            .classList.add(e.target.value);
+                    });
+                });
+
+            // 使用者修改次軸對齊
+            document
+                .querySelectorAll('input[name="align-items"]')
+                .forEach((item) => {
+                    item.addEventListener('click', (e) => {
+                        document
+                            .querySelectorAll('.align-items-label')
+                            .forEach((item) => {
+                                item.classList.remove('active');
+                            });
+                        e.target.nextElementSibling.classList.add('active');
+                        document
+                            .querySelector('#wrap')
+                            .classList.remove(
+                                'align-items-start',
+                                'align-items-end',
+                                'align-items-center',
+                                'align-items-baseline',
+                                'align-items-stretch'
+                            );
+                        document
+                            .querySelector('#wrap')
+                            .classList.add(e.target.value);
+                    });
+                });
+
+            // 使用者修改主軸長大
+            // document
+            //     .querySelectorAll('input[name="flex-grow"]')
+            //     .forEach((item) => {
+            //         item.addEventListener('click', (e) => {
+            //             document
+            //                 .querySelectorAll('.flex-grow-label')
+            //                 .forEach((item) => {
+            //                     item.classList.remove('active');
+            //                 });
+            //             e.target.nextElementSibling.classList.add('active');
+            //             document.querySelectorAll('.box').forEach((item) => {
+            //                 item.classList.remove('flex-grow-0', 'flex-grow-1');
+            //                 item.classList.add(e.target.value);
+            //             });
+            //         });
+            //     });
+
+            // 使用者修改主軸縮小
+            // document
+            //     .querySelectorAll('input[name="flex-shrink"]')
+            //     .forEach((item) => {
+            //         item.addEventListener('click', (e) => {
+            //             document
+            //                 .querySelectorAll('.flex-shrink-label')
+            //                 .forEach((item) => {
+            //                     item.classList.remove('active');
+            //                 });
+            //             e.target.nextElementSibling.classList.add('active');
+            //             document.querySelectorAll('.box').forEach((item) => {
+            //                 item.classList.remove(
+            //                     'flex-shrink-0',
+            //                     'flex-shrink-1'
+            //                 );
+            //                 item.classList.add(e.target.value);
+            //             });
+            //         });
+            //     });
+
+            // 使用者修改主軸基準
+            // document
+            //     .querySelector('#flex-basis')
+            //     .addEventListener('input', (e) => {
+            //         const inputNum = e.target.value;
+
+            //         const boxes = document.querySelectorAll('.box');
+            //         boxes.forEach((element) => {
+            //             element.style.flexBasis = `${inputNum}${
+            //                 isNaN(parseInt(inputNum)) ? '' : 'px'
+            //             }`;
+            //         });
+            //     });
+
+            // 使用者修改主軸換行
+            document
+                .querySelectorAll('input[name="flex-wrap"]')
+                .forEach((item) => {
+                    item.addEventListener('click', (e) => {
+                        document
+                            .querySelectorAll('.flex-wrap-label')
+                            .forEach((item) => {
+                                item.classList.remove('active');
+                            });
+                        e.target.nextElementSibling.classList.add('active');
+                        document
+                            .querySelector('#wrap')
+                            .classList.remove(
+                                'flex-nowrap',
+                                'flex-wrap',
+                                'flex-wrap-reverse'
+                            );
+                        document
+                            .querySelector('#wrap')
+                            .classList.add(e.target.value);
+                    });
+                });
+
+            // 使用者修改多行對齊
+            document
+                .querySelectorAll('input[name="align-content"]')
+                .forEach((item) => {
+                    item.addEventListener('click', (e) => {
+                        document
+                            .querySelectorAll('.align-content-label')
+                            .forEach((item) => {
+                                item.classList.remove('active');
+                            });
+                        e.target.nextElementSibling.classList.add('active');
+                        document
+                            .querySelector('#wrap')
+                            .classList.remove(
+                                'align-content-start',
+                                'align-content-end',
+                                'align-content-center',
+                                'align-content-between',
+                                'align-content-around',
+                                'align-content-stretch'
+                            );
+                        document
+                            .querySelector('#wrap')
+                            .classList.add(e.target.value);
+                    });
+                });
+
+            // 點擊新增自己的次軸規則
+            document
+                .querySelector('#btnAddAlignSelf')
+                .addEventListener('click', () => {
+                    const boxName = document.querySelector('#alignSelf').value;
+                    const boxNum = boxName.replace('box', '');
+
+                    document
+                        .querySelectorAll('#alignSelf option')
+                        .forEach((item) => {
+                            if (boxName === item.value) item.remove();
+                        });
+
+                    const newContainer = document.createElement('div');
+                    newContainer.style.border = '1px solid #ccc';
+
+                    const newTitle = document.createElement('p');
+                    newTitle.classList.add('mb-0', 'mx-2');
+                    newTitle.innerText = boxName;
+
+                    const newDiv = document.createElement('div');
+                    newDiv.classList.add(
+                        'pl-2',
+                        'd-flex',
+                        'flex-wrap',
+                        'align-item-center'
+                    );
+                    newDiv.style.background = document.querySelector(
+                        `.box:nth-child(${boxNum})`
+                    ).style.background;
+
+                    // Align-self
+                    const newSelectTitle = document.createElement('p');
+                    newSelectTitle.innerText = 'align-self:';
+                    newSelectTitle.classList.add(
+                        'mb-0',
+                        'text-nowrap',
+                        'd-flex',
+                        'align-items-center'
+                    );
+
+                    const newSelect = document.createElement('select');
+                    newSelect.id = `alignSelf${boxNum}`;
+                    newSelect.classList.add('alignSelf', 'm-2');
+                    newSelect.setAttribute('data-target', boxNum);
+                    newSelect.innerHTML = `
+                        <option value="">無</option>
+                        <option value="align-self-start">flex-start</option>
+                        <option value="align-self-end">flex-end</option>
+                        <option value="align-self-center">center</option>
+                        <option value="align-self-baseline">stretch</option>
+                        <option value="align-self-stretch">baseline</option>
+                    `;
+                    newSelect.addEventListener('change', (e) => {
+                        const targetNewClassName = e.target.value;
+                        const targetNum = e.target.getAttribute('data-target');
+                        const target = document.querySelector(
+                            `.box:nth-child(${targetNum})`
+                        );
+
+                        target.classList.remove(
+                            'align-self-start',
+                            'align-self-end',
+                            'align-self-center',
+                            'align-self-baseline',
+                            'align-self-stretch'
+                        );
+                        target.classList.add(targetNewClassName);
+                    });
+
+                    // order
+                    const newOrderTitle = document.createElement('p');
+                    newOrderTitle.innerText = 'order:';
+                    newOrderTitle.classList.add(
+                        'mb-0',
+                        'text-nowrap',
+                        'd-flex',
+                        'align-items-center'
+                    );
+
+                    const newOrderInput = document.createElement('input');
+                    newOrderInput.id = `order${boxNum}`;
+                    newOrderInput.classList.add('order', 'm-2');
+                    newOrderInput.style.width = '50px';
+                    newOrderInput.setAttribute('data-target', boxNum);
+                    newOrderInput.value = 0;
+
+                    newOrderInput.addEventListener('input', (e) => {
+                        const targetNewOrderValue = e.target.value;
+                        const targetNum = e.target.getAttribute('data-target');
+                        const target = document.querySelector(
+                            `.box:nth-child(${targetNum})`
+                        );
+
+                        target.style.order = targetNewOrderValue;
+                    });
+
+                    // grow
+                    const newGrowTitle = document.createElement('p');
+                    newGrowTitle.innerText = 'grow:';
+                    newGrowTitle.classList.add(
+                        'mb-0',
+                        'text-nowrap',
+                        'd-flex',
+                        'align-items-center'
+                    );
+
+                    const newGrowInput = document.createElement('input');
+                    newGrowInput.id = `grow${boxNum}`;
+                    newGrowInput.classList.add('grow', 'm-2');
+                    newGrowInput.style.width = '50px';
+                    newGrowInput.setAttribute('data-target', boxNum);
+                    newGrowInput.value = 0;
+
+                    newGrowInput.addEventListener('input', (e) => {
+                        const targetNewOrderValue = e.target.value;
+                        const targetNum = e.target.getAttribute('data-target');
+                        const target = document.querySelector(
+                            `.box:nth-child(${targetNum})`
+                        );
+
+                        target.style.flexGrow = targetNewOrderValue;
+                    });
+
+                    // shrink
+                    const newShrinkTitle = document.createElement('p');
+                    newShrinkTitle.innerText = 'shrink:';
+                    newShrinkTitle.classList.add(
+                        'mb-0',
+                        'text-nowrap',
+                        'd-flex',
+                        'align-items-center'
+                    );
+
+                    const newShrinkInput = document.createElement('input');
+                    newShrinkInput.id = `shrink${boxNum}`;
+                    newShrinkInput.classList.add('shrink', 'm-2');
+                    newShrinkInput.style.width = '50px';
+                    newShrinkInput.setAttribute('data-target', boxNum);
+                    newShrinkInput.value = 1;
+
+                    newShrinkInput.addEventListener('input', (e) => {
+                        const targetNewOrderValue = e.target.value;
+                        const targetNum = e.target.getAttribute('data-target');
+                        const target = document.querySelector(
+                            `.box:nth-child(${targetNum})`
+                        );
+
+                        target.style.flexShrink = targetNewOrderValue;
+                    });
+
+                    // basis
+                    const newBasisTitle = document.createElement('p');
+                    newBasisTitle.innerText = 'basis:';
+                    newBasisTitle.classList.add(
+                        'mb-0',
+                        'text-nowrap',
+                        'd-flex',
+                        'align-items-center'
+                    );
+
+                    const newBasisInput = document.createElement('input');
+                    newBasisInput.id = `basis${boxNum}`;
+                    newBasisInput.classList.add('basis', 'm-2');
+                    newBasisInput.style.width = '50px';
+                    newBasisInput.setAttribute('data-target', boxNum);
+                    newBasisInput.value = 'auto';
+
+                    newBasisInput.addEventListener('input', (e) => {
+                        const targetNewOrderValue = e.target.value;
+                        const targetNum = e.target.getAttribute('data-target');
+                        const target = document.querySelector(
+                            `.box:nth-child(${targetNum})`
+                        );
+                        target.style.flexBasis = `${targetNewOrderValue}${
+                            isNaN(parseInt(targetNewOrderValue)) ? '' : 'px'
+                        }`;
+                    });
+
+                    newDiv.append(newSelectTitle);
+                    newDiv.append(newSelect);
+                    newDiv.append(newOrderTitle);
+                    newDiv.append(newOrderInput);
+
+                    newDiv.append(newGrowTitle);
+                    newDiv.append(newGrowInput);
+
+                    newDiv.append(newShrinkTitle);
+                    newDiv.append(newShrinkInput);
+
+                    newDiv.append(newBasisTitle);
+                    newDiv.append(newBasisInput);
+
+                    newContainer.append(newTitle);
+                    newContainer.append(newDiv);
+                    document
+                        .querySelector('#alignSelfRuleArea')
+                        .append(newContainer);
+                });
+        </script>
+    </body>
+</html>

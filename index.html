@@ -770,7 +770,7 @@
 
                 const newGrowInput = document.createElement('input');
                 newGrowInput.id = `grow${boxNum}`;
-                newGrowInput.classList.add('grow', 'm-2');
+                newGrowInput.classList.add('grow', 'my-2', 'ml-0', 'mr-1', 'mx-md-2');
                 newGrowInput.style.width = '50px';
                 newGrowInput.setAttribute('data-target', boxNum);
                 newGrowInput.value = 0;
@@ -797,7 +797,7 @@
 
                 const newShrinkInput = document.createElement('input');
                 newShrinkInput.id = `shrink${boxNum}`;
-                newShrinkInput.classList.add('shrink', 'm-2');
+                newShrinkInput.classList.add('shrink', 'my-2', 'ml-0', 'mr-1', 'mx-md-2');
                 newShrinkInput.style.width = '50px';
                 newShrinkInput.setAttribute('data-target', boxNum);
                 newShrinkInput.value = 1;
@@ -824,8 +824,8 @@
 
                 const newBasisInput = document.createElement('input');
                 newBasisInput.id = `basis${boxNum}`;
-                newBasisInput.classList.add('basis', 'm-2');
-                newBasisInput.style.width = `${1.2 * 3}rem`;
+                newBasisInput.classList.add('basis', 'my-2', 'ml-0', 'mr-1', 'mx-md-2');
+                newBasisInput.style.width = `70px`;
                 newBasisInput.setAttribute('data-target', boxNum);
                 newBasisInput.value = 'auto';
 
